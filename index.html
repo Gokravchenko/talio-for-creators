@@ -33,6 +33,22 @@
     *{animation:none !important;}
     .talio-reveal{opacity:1 !important;transform:none !important;}
   }
+
+  /* Mobile nav — collapse links + CTA into a hamburger */
+  .talio-nav-links{display:flex;align-items:center;gap:28px;flex-wrap:wrap;}
+  .talio-nav-toggle{display:none;align-items:center;justify-content:center;width:42px;height:42px;padding:0;border:1px solid #e2dacd;border-radius:11px;background:#fff;color:#231f1a;cursor:pointer;flex:0 0 auto;}
+  .talio-nav-toggle svg{display:block;}
+  .talio-nav-toggle .talio-icon-close{display:none;}
+  .talio-nav-toggle[aria-expanded="true"] .talio-icon-open{display:none;}
+  .talio-nav-toggle[aria-expanded="true"] .talio-icon-close{display:block;}
+  @media (max-width:760px){
+    .talio-nav-toggle{display:inline-flex;}
+    .talio-nav-links{display:none;width:100%;flex-direction:column;align-items:stretch;gap:4px !important;padding-top:8px;}
+    .talio-nav-links.open{display:flex;}
+    .talio-nav-links a{padding:13px 14px;border-radius:11px;font-size:16px;}
+    .talio-nav-links a:not([href="#contact"]){border:1px solid #eee6db;}
+    .talio-nav-links a[href="#contact"]{text-align:center;margin-top:4px;}
+  }
 </style>
 </head>
 <body>
@@ -45,11 +61,15 @@
       <span style="width:32px;height:32px;border-radius:9px;overflow:hidden;flex:0 0 auto;box-shadow:0 2px 5px -1px rgba(0,0,0,.3);"><img src="assets/logo-talio.JPG" alt="Talio" style="display:block;width:100%;height:100%;object-fit:cover;"></span>
       <span style="font-family:'Manrope';font-weight:800;font-size:18px;letter-spacing:-0.01em;">Talio <span style="color:#8a93a3;font-weight:600;">for Creators</span></span>
     </a>
-    <div style="display:flex;align-items:center;gap:28px;flex-wrap:wrap;font-family:'Manrope';font-weight:600;font-size:15px;">
-      <a href="#product" style="color:#4a5361;">Продукт</a>
-      <a href="#money" style="color:#4a5361;">Монетизация</a>
-      <a href="#pilot" style="color:#4a5361;">Как начать</a>
-      <a href="#contact" data-hover="background:#d96f12;color:#fff;" style="background:#f2851e;color:#fff;padding:10px 18px;border-radius:11px;">Обсудить пилот</a>
+    <button class="talio-nav-toggle" type="button" aria-label="Меню" aria-expanded="false" aria-controls="talioNavLinks" onclick="var e=this.getAttribute('aria-expanded')==='true';this.setAttribute('aria-expanded',!e);document.getElementById('talioNavLinks').classList.toggle('open',!e);">
+      <svg class="talio-icon-open" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+      <svg class="talio-icon-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+    </button>
+    <div id="talioNavLinks" class="talio-nav-links" style="font-family:'Manrope';font-weight:600;font-size:15px;">
+      <a href="#product" style="color:#4a5361;" onclick="document.getElementById('talioNavLinks').classList.remove('open');document.querySelector('.talio-nav-toggle').setAttribute('aria-expanded','false');">Продукт</a>
+      <a href="#money" style="color:#4a5361;" onclick="document.getElementById('talioNavLinks').classList.remove('open');document.querySelector('.talio-nav-toggle').setAttribute('aria-expanded','false');">Монетизация</a>
+      <a href="#pilot" style="color:#4a5361;" onclick="document.getElementById('talioNavLinks').classList.remove('open');document.querySelector('.talio-nav-toggle').setAttribute('aria-expanded','false');">Как начать</a>
+      <a href="#contact" data-hover="background:#d96f12;color:#fff;" style="background:#f2851e;color:#fff;padding:10px 18px;border-radius:11px;" onclick="document.getElementById('talioNavLinks').classList.remove('open');document.querySelector('.talio-nav-toggle').setAttribute('aria-expanded','false');">Обсудить пилот</a>
     </div>
   </div>
 </nav>
